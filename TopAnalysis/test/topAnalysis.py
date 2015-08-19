@@ -60,6 +60,10 @@ parser.add_option('--invertPFIso', action='store_true',
                   dest='invertPFIso',
                   help='Invert PF isolation cut')
 
+parser.add_option('--maximum', metavar='F', type='int', action='store',
+                  default=50000000,
+                  dest='maxEvents',
+                  help='Set maximum number to use events')
 
 (options, args) = parser.parse_args()
 
@@ -168,11 +172,15 @@ pairs = []
 # loop over events
 count = 0
 ntotal = events.size()
+if ntotal > options.maxEvents :
+	print "Sample is too large(%d)! number of Total event is changed to %d"%(ntotal, options.maxEvents)
+	ntotal = options.maxEvents
 percentDone = 0.0
 ipercentDone = 0
 ipercentDoneLast = -1
 print "Start looping"
 for event in events:
+    if ( nEventsAnalyzed == ntotal ) : break
     nEventsAnalyzed += 1
     ipercentDone = int(percentDone)
     if ipercentDone != ipercentDoneLast :
