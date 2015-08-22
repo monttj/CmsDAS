@@ -117,9 +117,11 @@ secvtxMassHist = ROOT.TH1F('secvtxMassHist', "Secondary Vertex Mass", 150, 0., 5
 secvtxMassHistB = ROOT.TH1F('secvtxMassHistB', "Secondary Vertex Mass, b jets", 150, 0., 5.0)
 secvtxMassHistC = ROOT.TH1F('secvtxMassHistC', "Secondary Vertex Mass, c jets", 150, 0., 5.0)
 secvtxMassHistL = ROOT.TH1F('secvtxMassHistL', "Secondary Vertex Mass, udsg jets", 150, 0., 5.0)
-metVsIso = ROOT.TH2F('metVsIso', 'MET Versus PFIsolation', 15, 0., 150., 125, 0., 2.5)
+metVsIso = ROOT.TH2F('metVsIso', 'MET Versus PFIsolation', 15, 0., 150., 40, 0., 4.0)
 jetPtHist = ROOT.TH1F('jetPtHist', 'Jet p_{T}', 150, 0., 600.)
 m3Hist = ROOT.TH1F('m3Hist', 'M3 Histogram', 150, 0., 600.)
+nJetsHist = ROOT.TH1F('nJetsHist','Number of Jets', 10, 0, 10)
+
 
 ############################################
 # Physics level parameters for systematics #
@@ -214,7 +216,8 @@ for event in events:
     ntags = 0
     jets_p4 = []
     for ijet in range( 0, len( jets ) ) :
-        if jets[ijet].pt() > 30.0 :
+        print "eta = " + str(abs(jets[ijet].eta())) + " id = " + str(jets[ijet].LooseId()) 
+        if jets[ijet].pt() > 30.0 and abs(jets[ijet].eta()) < 2.5: # and jets[ijet].LooseId():
             njets += 1
         ijetP4 = ROOT.TLorentzVector()
         ijetP4.SetPtEtaPhiM( jets[ijet].pt(), jets[ijet].eta(), jets[ijet].phi(), jets[ijet].mass() )
@@ -232,7 +235,7 @@ for event in events:
                     secvtxMassHistC.Fill( jetSecvtxMass )
                 else :
                     secvtxMassHistL.Fill( jetSecvtxMass )
- 
+    nJetsHist.Fill(njets) 
     # We're not interested in <=4 jets
     if njets < minJets :
         continue
@@ -265,9 +268,16 @@ for event in events:
     event.getByLabel (electronLabel, electronHandle)
     electrons = electronHandle.product() 
 
-    numMuons = len(muons)
-    numElectrons = len(electrons)
+    numMuons = 0 
+    numElectrons = 0
 
+    for imu in range( 0, len( muons ) ) :
+      if muons[imu].isTightMuon():
+        numMuons = numMuons + 1
+    for iel in range( 0, len( electrons ) ) :
+      if electrons[iel].isPF() and electrons[iel].passConversionVeto() :
+        numElectrons = numElectrons + 1
+ 
     # If neither muons nor electrons are found, skip
     if numMuons == 0 and numElectrons == 0 :
         continue
