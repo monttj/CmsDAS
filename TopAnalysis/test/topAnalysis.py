@@ -216,7 +216,6 @@ for event in events:
     ntags = 0
     jets_p4 = []
     for ijet in range( 0, len( jets ) ) :
-        print "eta = " + str(abs(jets[ijet].eta())) + " id = " + str(jets[ijet].LooseId()) 
         if jets[ijet].pt() > 30.0 and abs(jets[ijet].eta()) < 2.5: # and jets[ijet].LooseId():
             njets += 1
         ijetP4 = ROOT.TLorentzVector()
@@ -271,15 +270,20 @@ for event in events:
     numMuons = 0 
     numElectrons = 0
 
+    selectedMuons = []
+    selectedElectrons = []
     for imu in range( 0, len( muons ) ) :
-      if muons[imu].isTightMuon():
+      if muons[imu].isTightMuon() and muons[imu].pt() > muonPtMin and abs(muons[imu].eta()) < 2.5 :
         numMuons = numMuons + 1
+        selectedMuons.append( muons[imu] ) 
     for iel in range( 0, len( electrons ) ) :
-      if electrons[iel].isPF() and electrons[iel].passConversionVeto() :
+      if electrons[iel].isPF() and electrons[iel].passConversionVeto() and electrons[iel].pt() > electronPtMin and abs(electrons[iel].eta()) < 2.5:
         numElectrons = numElectrons + 1
- 
+        selectedElectrons.append( electrons[iel] ) 
+
+    numLeptons = numMuons + numElectrons 
     # If neither muons nor electrons are found, skip
-    if numMuons == 0 and numElectrons == 0 :
+    if numLeptons == 0 or numLeptons > 1 :
         continue
     # If we are looking for muons but none are found, skip
     if options.lepType == 0 and numMuons == 0 :
@@ -289,10 +293,10 @@ for event in events:
         continue
 
     # keep leptons with certain pt threshold in the event
-    if options.lepType == 0 and muons[0].pt() <= muonPtMin:
-        continue
-    if options.lepType == 1 and electrons[0].pt() <= electronPtMin:
-        continue
+    #if options.lepType == 0 and muons[0].pt() <= muonPtMin:
+    #    continue
+    #if options.lepType == 1 and electrons[0].pt() <= electronPtMin:
+    #    continue
     
     # Now get the MET
     event.getByLabel( metLabel, metHandle )
@@ -301,16 +305,16 @@ for event in events:
     # Now get the PF isolation
     lepIso = -1.0
     if options.lepType == 0 :
-        nhIso = muons[0].neutralHadronIso()
-        chIso = muons[0].chargedHadronIso()
-        phIso = muons[0].photonIso() 
-        puIso = muons[0].puChargedHadronIso()  
+        nhIso = selectedMuons[0].neutralHadronIso()
+        chIso = selectedMuons[0].chargedHadronIso()
+        phIso = selectedMuons[0].photonIso() 
+        puIso = selectedMuons[0].puChargedHadronIso()  
         lepIso = (chIso + max(0.0, nhIso + phIso - 0.5*puIso)) / muons[0].pt()
     if options.lepType == 1 :
-        nhIso = electrons[0].neutralHadronIso()
-        chIso = electrons[0].chargedHadronIso()
-        phIso = electrons[0].photonIso()        
-        puIso = electrons[0].puChargedHadronIso() 
+        nhIso = selectedElectrons[0].neutralHadronIso()
+        chIso = selectedElectrons[0].chargedHadronIso()
+        phIso = selectedElectrons[0].photonIso()        
+        puIso = selectedElectrons[0].puChargedHadronIso() 
         lepIso = (chIso + max(0.0, nhIso + phIso - 0.5*puIso)) / electrons[0].pt()
 
     # Make a plot of the MET versus ISO for normalization purposes

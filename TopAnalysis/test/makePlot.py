@@ -19,7 +19,7 @@ h_zjets_m3Hist = f_zjets.Get("m3Hist")
 h_data_m3Hist = f_data.Get("m3Hist")
 
 lumi_data = 46.48  #data
-lumi_ttbar = 38662 / Xsection["DYJetsToLL_M-50_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8"] 
+lumi_ttbar = 38662 / Xsection["TTJets_TuneCUETP8M1_13TeV-madgraphMLM-pythia8"] 
 lumi_wjets = 2859761 /Xsection["WJetsToLNu_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8"]  
 lumi_singletop_t = 6322 / Xsection["ST_t-channel_top_4f_leptonDecays_13TeV-powheg-pythia8_TuneCUETP8M1"] 
 lumi_zjets = 280051 / Xsection["DYJetsToLL_M-50_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8"]
@@ -28,16 +28,16 @@ scale_ttbar = lumi_data / lumi_ttbar
 scale_wjets = lumi_data / lumi_wjets
 scale_singletop_t = lumi_data / lumi_singletop_t
 scale_zjets = lumi_data / lumi_zjets
- 
+
 h_ttbar_m3Hist.Scale(scale_ttbar)
 h_wjets_m3Hist.Scale(scale_wjets)
 h_singletop_t_m3Hist.Scale(scale_singletop_t)
 h_zjets_m3Hist.Scale(scale_zjets)
 
-h_ttbar_m3Hist.SetFillColor(kRed+1)
-h_wjets_m3Hist.SetFillColor(kGreen-3)
-h_singletop_t_m3Hist.SetFillColor(kMagenta)
-h_zjets_m3Hist.SetFillColor(kAzure-2)
+h_ttbar_m3Hist.SetFillColor(ROOT.kRed+1)
+h_wjets_m3Hist.SetFillColor(ROOT.kGreen-3)
+h_singletop_t_m3Hist.SetFillColor(ROOT.kMagenta)
+h_zjets_m3Hist.SetFillColor(ROOT.kAzure-2)
 
 s = THStack("hs","")
 s.Add(h_ttbar_m3Hist)
@@ -60,6 +60,7 @@ n_zjets = h_zjets_m3Hist.Integral()
 n_background = n_ttbar + n_wjets + n_singletop_t + n_zjets
 n_data = h_data_m3Hist.Integral()
 
+print "ttbar = " + str(n_ttbar) 
 print "wjets = " + str(n_wjets) 
 print "singletop_t = " + str(n_singletop_t) 
 print "zjets = " + str(n_zjets) 
