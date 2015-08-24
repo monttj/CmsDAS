@@ -1,6 +1,6 @@
 #https://twiki.cern.ch/twiki/bin/view/CMS/StandardModelCrossSectionsat13TeV
 Xsection = {}
-Xsection["DYJetsToLL_M-50_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8"] = 831.8
+Xsection["DYJetsToLL_M-50_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8"] = 6025.2 
 Xsection["TTJets_TuneCUETP8M1_13TeV-madgraphMLM-pythia8"] = 831.8
 Xsection["TTJets_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8"] = 831.8
 Xsection["TT_TuneCUETP8M1_13TeV-powheg-scaledown-pythia8"] = 831.8
