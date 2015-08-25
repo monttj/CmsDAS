@@ -1,5 +1,3 @@
-/cms/scratch/CAT/MuonEG/v7-3-6_Run2015B-17Jul2015-v1/150820_215608/0000/catTuple_2.root
-/cms/scratch/CAT/MuonEG/v7-3-6_Run2015B-17Jul2015-v1/150820_215608/0000/catTuple_1.root
 /cms/scratch/CAT/MuonEG/v7-3-6_Run2015B-PromptReco-v1/150820_215352/0000/catTuple_21.root
 /cms/scratch/CAT/MuonEG/v7-3-6_Run2015B-PromptReco-v1/150820_215352/0000/catTuple_4.root
 /cms/scratch/CAT/MuonEG/v7-3-6_Run2015B-PromptReco-v1/150820_215352/0000/catTuple_14.root

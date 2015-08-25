@@ -1,0 +1,2 @@
+/cmsdas/data/LongEX_top/MuonEG/v7-3-6_Run2015B-17Jul2015-v1/150820_215608/0000/catTuple_2.root
+/cmsdas/data/LongEX_top/MuonEG/v7-3-6_Run2015B-17Jul2015-v1/150820_215608/0000/catTuple_1.root

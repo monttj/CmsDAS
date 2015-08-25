@@ -1,14 +1,3 @@
-/cms/scratch/CAT/DoubleMuon/v7-3-6_Run2015B-17Jul2015-v1/150820_215540/0000/catTuple_4.root
-/cms/scratch/CAT/DoubleMuon/v7-3-6_Run2015B-17Jul2015-v1/150820_215540/0000/catTuple_8.root
-/cms/scratch/CAT/DoubleMuon/v7-3-6_Run2015B-17Jul2015-v1/150820_215540/0000/catTuple_2.root
-/cms/scratch/CAT/DoubleMuon/v7-3-6_Run2015B-17Jul2015-v1/150820_215540/0000/catTuple_5.root
-/cms/scratch/CAT/DoubleMuon/v7-3-6_Run2015B-17Jul2015-v1/150820_215540/0000/catTuple_6.root
-/cms/scratch/CAT/DoubleMuon/v7-3-6_Run2015B-17Jul2015-v1/150820_215540/0000/catTuple_1.root
-/cms/scratch/CAT/DoubleMuon/v7-3-6_Run2015B-17Jul2015-v1/150820_215540/0000/catTuple_11.root
-/cms/scratch/CAT/DoubleMuon/v7-3-6_Run2015B-17Jul2015-v1/150820_215540/0000/catTuple_10.root
-/cms/scratch/CAT/DoubleMuon/v7-3-6_Run2015B-17Jul2015-v1/150820_215540/0000/catTuple_7.root
-/cms/scratch/CAT/DoubleMuon/v7-3-6_Run2015B-17Jul2015-v1/150820_215540/0000/catTuple_9.root
-/cms/scratch/CAT/DoubleMuon/v7-3-6_Run2015B-17Jul2015-v1/150820_215540/0000/catTuple_3.root
 /cms/scratch/CAT/DoubleMuon/v7-3-6_Run2015B-PromptReco-v1/150820_215326/0000/catTuple_21.root
 /cms/scratch/CAT/DoubleMuon/v7-3-6_Run2015B-PromptReco-v1/150820_215326/0000/catTuple_4.root
 /cms/scratch/CAT/DoubleMuon/v7-3-6_Run2015B-PromptReco-v1/150820_215326/0000/catTuple_14.root
