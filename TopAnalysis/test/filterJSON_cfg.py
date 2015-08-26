@@ -1,14 +1,20 @@
 import FWCore.ParameterSet.Config as cms
 
+def getFileList(filelist_name) :
+  ## Please, select Data sample file list.
+  readfile = open(filelist_name)
+  filelist =[ ]
+  for file in readfile.readlines() :
+    filelist.append("file:"+file)
+  return filelist
+
 process = cms.Process("JSON")
 
+filelist_name = "../python/sourceFiles/KNU/SingleMuon.txt"
+filelist = getFileList( filelist_name ) 
 process.source = cms.Source("PoolSource",
     fileNames = cms.untracked.vstring(
-       # at KISTI 
-       'file:/cms/scratch/CAT/SingleMuon/v7-3-0_Run2015B-PromptReco-v1/150720_060727/0000/catTuple_4.root',
-       'file:/cms/scratch/CAT/SingleMuon/v7-3-0_Run2015B-PromptReco-v1/150720_060727/0000/catTuple_2.root',
-       'file:/cms/scratch/CAT/SingleMuon/v7-3-0_Run2015B-PromptReco-v1/150720_060727/0000/catTuple_1.root',
-       'file:/cms/scratch/CAT/SingleMuon/v7-3-0_Run2015B-PromptReco-v1/150720_060727/0000/catTuple_3.root'
+       filelist
     )
 )
 

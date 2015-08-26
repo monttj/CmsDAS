@@ -87,7 +87,7 @@ from DataFormats.FWLite import Events, Handle
 
 # Get the file list.
 if options.inputFiles:
-    files = glob.glob( options.files )
+    files = glob.glob( options.inputFiles )
     print 'getting files', files
 elif options.txtfiles:
     files = []
