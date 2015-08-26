@@ -7,7 +7,7 @@ python topAnalysis.py --txtfiles=../python/sourceFiles/KNU/WJetsToLNu_TuneCUETP8
 python topAnalysis.py --txtfiles=../python/sourceFiles/KNU/DYJetsToLL_M-50_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8.txt --outputFile=plots_zjets.root --doMC --maximum 280051 &
 python topAnalysis.py --txtfiles=../python/sourceFiles/KNU/SingleMuon.txt --outputFile=plots_data.root &
 
-### Skimmed SingleMuon data(Muon>20GeV). Please, use total number of events : 3633477
+### Skimmed SingleMuon data(Muon>20GeV). Please, use total number of events : 3633477 instead of 1749790
 #python topAnalysis.py --inputFiles=/cmsdas/data/LongEX_top/filtered_data/SingleMuon/catTuple_data_atLeast_1Muon.root --outputFile=plots_data.root &
-### Skimmed WJets MC(Muon>30GeV). Please, use total number of events : 24040263
+### Skimmed WJets MC(Muon>30GeV). Please, use total number of events : 2880000 instead of 375900
 #python topAnalysis.py --txtfiles=../python/sourceFiles/KNU/WJetsToLNu_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8_MuonFiltered.txt --outputFile=plots_wjets.root --doMC 
