@@ -9,5 +9,5 @@ python topAnalysis.py --txtfiles=../python/sourceFiles/KNU/SingleMuon.txt --outp
 
 ### Skimmed SingleMuon data(Muon>20GeV). Original total number of events : 3633477. It is a Real data. Do not scale this sample.
 #python topAnalysis.py --inputFiles=/cmsdas/data/LongEX_top/filtered_data/SingleMuon/catTuple_data_atLeast_1Muon.root --outputFile=plots_data.root &
-### Skimmed WJets MC(Muon>30GeV). Please, use total number of events : 2880000 instead of 375900
-#python topAnalysis.py --txtfiles=../python/sourceFiles/KNU/WJetsToLNu_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8_MuonFiltered.txt --outputFile=plots_wjets.root --doMC 
+### Skimmed WJets MC(Muon>30GeV). Please, use total number of events : 9993300 instead of 1306559
+#python topAnalysis.py --txtfiles=../python/sourceFiles/KNU/WJetsToLNu_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8_MuonFiltered_nevt_9993300.txt --outputFile=plots_wjets.root --doMC 
