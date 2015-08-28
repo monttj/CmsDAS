@@ -21,7 +21,8 @@ const double pi = TMath::Pi();
 
 void topAnalysis(std::string fileNamesIn, std::string outputFile="top_fwlite.root",
                  bool doMC=false, int lepType=0,
-                 bool invertMET=false, bool invertPFIso=false, int maxEvents=100000000)
+                 bool invertMET=false, bool invertPFIso=false,
+                 int maxEvents=100000000)
 {
   gROOT->Macro("rootlogon.C");
 
@@ -200,17 +201,18 @@ void topAnalysis(std::string fileNamesIn, std::string outputFile="top_fwlite.roo
     if ( nbjet == 0 ) continue;
     ++nEventsPassed1Tag;
 
-    if ( invertMET and met < metMin ) continue;
-    else if ( !invertMET and met > metMin ) continue;
+    if ( invertMET and met > metMin ) continue;
+    else if ( !invertMET and met < metMin ) continue;
 
-    if ( invertPFIso and lep_iso > isoMax ) continue;
-    else if ( !invertPFIso and lep_iso < isoMax ) continue;
+    if ( invertPFIso and lep_iso < isoMax ) continue;
+    else if ( !invertPFIso and lep_iso > isoMax ) continue;
 
     // Now compute m3
     const double m3 = (jetHandle->at(0).p4()+jetHandle->at(1).p4()+jetHandle->at(2).p4()).mass();
     m3Hist->Fill(m3);
   }
 
+  f->cd();
   secvtxMassHist->Write();
   secvtxMassHistB->Write();
   secvtxMassHistC->Write();
