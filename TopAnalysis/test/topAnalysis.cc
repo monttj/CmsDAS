@@ -84,8 +84,6 @@ void topAnalysis(std::string fileNamesIn, std::string outputFile="top_fwlite.roo
     const double percentDone = float(nEventsAnalyzed)/float(nTotal)*100.0;
     const int ipercentDone(percentDone);
     if ( ipercentDone != ipercentDoneLast ) {
-      const double sumTime = timer.RealTime();
-      timer.Start();
       ipercentDoneLast = ipercentDone;
       cout << "Processing " << nEventsAnalyzed << "/" << nTotal << " : " << ipercentDone << "%\n";
     }
@@ -154,7 +152,8 @@ void topAnalysis(std::string fileNamesIn, std::string outputFile="top_fwlite.roo
     metVsIso->Fill(met, lep_iso);
 
     int nbjet = 0;
-    std::vector<double> jets_pt, jets_eta, jets_phi, jets_btag, jets_svMass;
+    std::vector<TLorentzVector> jets_p4;
+    std::vector<double> jets_btag, jets_svMass;
     std::vector<int> jets_flav;
     double evt_maxbtag = -1, evt_svMassAtMaxbtag = -1;
     for ( unsigned int ijet = 0; ijet < jetHandle->size(); ++ijet ) {
@@ -167,9 +166,7 @@ void topAnalysis(std::string fileNamesIn, std::string outputFile="top_fwlite.roo
       const double btag = jet.bDiscriminator("pfCombinedInclusiveSecondaryVertexV2BJetTags");
       const int flav = (doMC ? 0 : std::abs(jet.partonFlavour()));
 
-      jets_pt.push_back(pt);
-      jets_eta.push_back(eta);
-      jets_phi.push_back(jet.phi());
+      jets_p4.push_back(TLorentzVector(jet.px(), jet.py(), jet.pz(), jet.energy()));
       jets_btag.push_back(btag);
       jets_svMass.push_back(-1);
       jets_flav.push_back(flav);
@@ -193,7 +190,7 @@ void topAnalysis(std::string fileNamesIn, std::string outputFile="top_fwlite.roo
       jetPtHist->Fill(pt);
       secvtxMassHist->Fill(jets_svMass.back());
     }
-    const int njets = jets_pt.size();
+    const int njets = jets_p4.size();
     nJetsHist->Fill(njets);
     if ( njets < minJets ) continue;
     ++nEventsPassed4Jets;
@@ -208,9 +205,25 @@ void topAnalysis(std::string fileNamesIn, std::string outputFile="top_fwlite.roo
     else if ( !invertPFIso and lep_iso > isoMax ) continue;
 
     // Now compute m3
-    const double m3 = (jetHandle->at(0).p4()+jetHandle->at(1).p4()+jetHandle->at(2).p4()).mass();
+    TLorentzVector maxSumPtP4;
+    for ( int i = 0; i<njets; ++i ) {
+      for ( int j=i+1; j<njets; ++j ) {
+        for ( int k=j+1; k<njets; ++k ) {
+          const auto p4 = jets_p4[i] + jets_p4[j] + jets_p4[k];
+          if ( p4.Pt() < maxSumPtP4.Pt() ) continue;
+          maxSumPtP4 = p4;
+        }
+      }
+    }
+    const double m3 = maxSumPtP4.M();
     m3Hist->Fill(m3);
   }
+
+  timer.Stop();
+  cout << "Finished event loop\n";
+  cout << "Real time = " << timer.RealTime() << endl;;
+  cout << "CPU time = " << timer.CpuTime() << endl;;
+  cout << "---\n";
 
   f->cd();
   secvtxMassHist->Write();
