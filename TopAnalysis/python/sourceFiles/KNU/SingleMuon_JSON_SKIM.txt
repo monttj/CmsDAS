@@ -1,0 +1,6 @@
+/cmsdas/data/LongEX_top/filtered_data/SingleMuon/pt_20GeV_JSON_Applied/catTuple_datai_muon20_JSON_filtered_000.root
+/cmsdas/data/LongEX_top/filtered_data/SingleMuon/pt_20GeV_JSON_Applied/catTuple_datai_muon20_JSON_filtered_001.root
+/cmsdas/data/LongEX_top/filtered_data/SingleMuon/pt_20GeV_JSON_Applied/catTuple_datai_muon20_JSON_filtered_002.root
+/cmsdas/data/LongEX_top/filtered_data/SingleMuon/pt_20GeV_JSON_Applied/catTuple_datai_muon20_JSON_filtered_003.root
+/cmsdas/data/LongEX_top/filtered_data/SingleMuon/pt_20GeV_JSON_Applied/catTuple_datai_muon20_JSON_filtered_004.root
+/cmsdas/data/LongEX_top/filtered_data/SingleMuon/pt_20GeV_JSON_Applied/catTuple_datai_muon20_JSON_filtered_005.root
